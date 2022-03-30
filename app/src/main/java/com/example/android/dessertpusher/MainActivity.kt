@@ -85,6 +85,12 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         // TODO (03) Check here if the Bundle savedInstanceState is null. If it isn't, get the
         // three values you saved and restore them: revenue, desserts sold and the timer's
         // seconds count. Also make sure to show the correct image resource.
+        if (savedInstanceState != null) {
+            revenue = savedInstanceState.getInt(KEY_REVENUE, 0)
+            dessertsSold = savedInstanceState.getInt(KEY_DESSERTS_SOLD, 0)
+            dessertTimer.secondsCount = savedInstanceState.getInt(KEY_DESSERT_TIMER, 0)
+            showCurrentDessert()
+        }
 
 
 
@@ -169,6 +175,9 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         Timber.i("onSaveInstanceState Called")
+        outState.putInt(KEY_REVENUE, revenue)
+        outState.putInt(KEY_DESSERTS_SOLD, dessertsSold)
+        outState.putInt(KEY_DESSERT_TIMER, dessertTimer.secondsCount)
 
     }
 
